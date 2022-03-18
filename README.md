@@ -34,7 +34,7 @@ This prototype shall work with Arduino with the following changes:
  
 
 ## Software:
-You can see a solution overview diagram [here](https://github.com/i998).
+You can see a solution overview diagram [here](https://github.com/i998/Arduino_MVC_STM32/blob/main/documentation/Arduino%20MVC%20Solution%20Overview.pdf).
 
 How these components are connected to each other?  In brief, The three key classes (DAO, Controller and Presentation) instantiated in the sketch and access each other via pointers. The sketch's function *Setup()* calls the relevant *Setup()* method of each class  - that allows to perform any  required  setup procedures located inside these classes.  
 
@@ -72,7 +72,7 @@ In  order to run this prototype you will need:
    - A variable resistor, any from 1K to 10K will fit 
    - A couple of buttons and a 1K resistor
 
-See the wiring diagram [here](https://github.com/i998).
+See the wiring diagram [here](https://github.com/i998/Arduino_MVC_STM32/blob/main/documentation/Arduino%20MVC%20Wiring%20Diagram.JPG).
 
 
 ## Repository Contents:
