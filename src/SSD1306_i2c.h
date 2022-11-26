@@ -2,6 +2,8 @@
 Lightweight SSD1306_i2c library for STM32, for use with STM32 hardware I2C ports. Requires Adafruit_GFX Library.
 Original library is from https://github.com/rogerclarkmelbourne/Arduino_STM32/tree/master/STM32F1/libraries/Adafruit_SSD1306
 Updated by IF 
+2022-11-20
+- minor bugs corrected in  SSD1306_i2c.h to work with Arduino.  Tested the library with Arduino Pro Mini, works OK. An example added. 
 2022-03-10
 - tested support of hardware I2C for Maple Mini board / STM32 (https://github.com/rogerclarkmelbourne/Arduino_STM32/)
 - simplified to support I2C only and use a pointer to I2C object in order to reduce potential problems with redefining Wire etc 
@@ -132,7 +134,8 @@ class SSD1306_i2c : public Adafruit_GFX {
   SSD1306_i2c(void);								   
   SSD1306_i2c(TwoWire *I2C);
   SSD1306_i2c(TwoWire *I2C, uint8_t rstPin);  
- ~SSD1306_i2c(void);
+
+ ~SSD1306_i2c(void)  {} ;
   
   //Sets up library and hardware. Include in setup() function in your sketch
   void begin(uint8_t switchvcc = SSD1306_SWITCHCAPVCC, uint8_t i2caddr = SSD1306_I2C_ADDRESS, bool reset=false);
@@ -166,8 +169,8 @@ class SSD1306_i2c : public Adafruit_GFX {
 	  TwoWire *_i2c;  
 	#elif defined(ARDUINO_ARCH_STM32F4)    //Roger Clark "libmaple f4 core"
 	  TwoWire *_i2c; 
-	#elif defined(__AVR__)  // Arduino 
-	  Wire *_i2c;
+	#elif defined(__AVR__)  // Arduino  
+	  TwoWire *_i2c;
 	#elif defined(__arm__)  // Arduino
 	   Wire *_i2c;
 	#else   //  "unknown core"
@@ -177,7 +180,7 @@ class SSD1306_i2c : public Adafruit_GFX {
 	//variables 
     int8_t _i2caddr, _vccstate, sid, sclk, dc, rst, cs;   	
     
-volatile uint32 *mosiport, *clkport, *csport, *dcport;
+volatile uint32_t *mosiport, *clkport, *csport, *dcport;
    uint32_t  mosipinmask, clkpinmask, cspinmask, dcpinmask;
 
   inline void drawFastVLineInternal(int16_t x, int16_t y, int16_t h, uint16_t color) __attribute__((always_inline));
